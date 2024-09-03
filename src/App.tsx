@@ -11,26 +11,26 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div style={{display: "flex", flexDirection: "row", gap: "5em"}}>
-          <div>
-            <b>Example 1 - Buttons and input fields querying</b>
-            <SimpleInput/>
-          </div>
-          <div>
-            <b>Example 2 - Mocking props</b>
-            <ProductList products={[{id: 1, title: "Product 1"}, {id: 2, title: "Product 2"}, {id: 3, title: "Product 3"}]} showProducts={true} />
-          </div>
-          <div>
-            <b>Example 3 - State updates and user interaction</b>
-            <SimpleCounter/>
-          </div>
-          <div>
-            <b>Example 4 - Data fetching</b>
-            <SimpleDataFetch/>
-          </div>
           {/*<div>*/}
-          {/*  <b>Example 5 - Test</b>*/}
-          {/*  <MyProducts/>*/}
+          {/*  <b>Example 1 - Buttons and input fields querying</b>*/}
+          {/*  <SimpleInput/>*/}
           {/*</div>*/}
+          {/*<div>*/}
+          {/*  <b>Example 2 - Mocking props</b>*/}
+          {/*  <ProductList products={[{id: 1, title: "Product 1"}, {id: 2, title: "Product 2"}, {id: 3, title: "Product 3"}]} showProducts={true} />*/}
+          {/*</div>*/}
+          {/*<div>*/}
+          {/*  <b>Example 3 - State updates and user interaction</b>*/}
+          {/*  <SimpleCounter/>*/}
+          {/*</div>*/}
+          {/*<div>*/}
+          {/*  <b>Example 4 - Data fetching</b>*/}
+          {/*  <SimpleDataFetch/>*/}
+          {/*</div>*/}
+          <div>
+            <b>Example 5 - Test</b>
+            <MyProducts/>
+          </div>
 
         </div>
       </header>

@@ -1,6 +1,5 @@
 import {Product, ProductList} from "../Example2/ProductList";
 import {useEffect, useState} from "react";
-import axios from "axios";
 import {fetchProducts} from "../../services/services";
 
 export const SimpleDataFetch = () => {
