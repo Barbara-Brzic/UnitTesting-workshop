@@ -26,9 +26,9 @@ test('should render input field', () => {
     render(<SimpleInput />)
 
     //expect input field to be displayed and have default value
-    const input = screen.getByRole(/textbox/)
+    // const input = screen.getByRole(/textbox/)
     // const input = screen.getByTestId(/unique-username/)
-    // const input = screen.getByLabelText(/username/i);
+    const input = screen.getByLabelText(/username/i);
     // const input = screen.getByDisplayValue("Jane Doe");
 
     expect(input).toBeInTheDocument()
