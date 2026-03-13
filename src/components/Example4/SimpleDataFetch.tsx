@@ -7,9 +7,9 @@ export const SimpleDataFetch = () => {
     const [products, setProducts] = useState<Product[]>([])
 
     useEffect(() => {
-            fetchProducts().then((res) => {
-                if(res.status === 200) setProducts(res.data.products)
-            });
+        fetchProducts().then((res) => {
+            if(res.status === 200) setProducts(res.data.products)
+        });
     }, [])
 
     return(

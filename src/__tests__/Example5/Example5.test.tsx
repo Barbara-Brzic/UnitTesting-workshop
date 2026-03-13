@@ -1,11 +1,5 @@
-import {act, render, screen, waitFor} from "@testing-library/react";
-import {MyProducts} from "../../components/Example5/MyProducts";
 import {Product} from "../../components/Example2/ProductList";
 import {ProductFullInfo} from "../../components/Example5/SelectableProductList";
-import * as services from "../../services/services";
-import {AxiosResponse} from "axios";
-import userEvent from "@testing-library/user-event";
-
 
 describe("MyProducts", () => {
     const productsResponse: { products:  Product[] } = {
@@ -22,36 +16,36 @@ describe("MyProducts", () => {
     }
 
     test("should show loading message while fetching products", () => {
-        //render component
+        //Render component
 
-        //expect loading message to be displayed
+        //Expect a loading message to be displayed
     })
 
     test("should fetch product list initially, and display single product info when selected from the list", async () => {
-        //mock http requests
+        //Mock HTTP requests
 
-        //render component
+        //Render component
 
-        //expect fetchProducts endpoint to be called
+        //Expects fetchProducts endpoint to be called
 
-        //expect to render list of products
+        //Expect to render a list of products
 
-        //select 1st product
+        //Select the first product
 
-        //expect fetchProductInfo endpoint to be called
+        //Expect fetchProductInfo endpoint to be called
 
-        //expect Selected product info to be displayed
+        //Expect selected product info to be displayed
     })
 
 
     test("should show an error message if error occurred", async () => {
-        //mock fetching data error
+        //Mock fetching data error
 
-        //render component
+        //Render component
 
-        //expect fetchProducts endpoint to be called
+        //Expect the fetchProducts endpoint to be called
 
-        //expect error message to be displayed
+        //Expect an error message to be displayed
     })
 
 })

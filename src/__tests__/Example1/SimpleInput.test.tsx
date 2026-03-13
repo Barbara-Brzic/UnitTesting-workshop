@@ -5,28 +5,28 @@ import {SimpleInput} from "../../components/Example1/SimpleInput";
 
 test("should render title", () => {
     //ARRANGE
-    //prepare data
+    //Prepare data
     const text = "Example 1";
 
     //ACT
-    //render component
+    //Render component
     render(<SimpleInput/>);
 
     //ASSERT
-    //expect text to be displayed on the screen
+    //Expect text to be displayed on the screen
     const textElement = screen.getByText(text);
     expect(textElement).toBeInTheDocument();
 })
 
 test("should render input field", () => {
-    //prepare data
+    //Prepare data
 
-    //render component
+    //Render component
     render(<SimpleInput/>);
 
-    //expect input field to be displayed and have default value
-    const input = screen.getByRole(/myinput/i);
-    expect(input).toHaveDisplayValue(/Jane doe/i);
+    //Expect the input field to be displayed and have the default value
+    const input = screen.getByRole("myinput");
+    expect(input).toHaveDisplayValue(/Jane Doe/i);
 })
 
 //TODO: query button by role

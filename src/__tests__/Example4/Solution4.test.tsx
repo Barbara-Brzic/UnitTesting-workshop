@@ -18,45 +18,45 @@ describe("SimpleDataFetch", () => {
         }]
     }
 
-    //using jest.mock function
+    //Using jest.mock function
     test("should fetch products and show them on screen when 'Show products' button is clicked (* using jest-mock)", async ()=> {
-        //mock fetchProducts call
+        //Mock fetchProducts call
         (fetchProducts as jest.Mock).mockResolvedValue({status: 200, data: productsResponse})
 
-        //render component
+        //Render component
         render(<SimpleDataFetch/>)
 
-        //wait for endpoint to be called and data returned
+        //Wait for the endpoint to be called and data returned
         await waitFor(() => {
             expect(fetchProducts).toBeCalled();
         })
 
-        //click on button
+        //Click on the button
         userEvent.click(screen.getByText(/Show products/i));
 
-        //expect product to be displayed
+        //Expect the product to be displayed
         await waitFor(() => {
             expect(screen.getByText(/Product 1/i)).toBeInTheDocument();
         })
     })
 
-    //using jest.spy function
+    //Using jest.spy function
     test("should fetch products and show them on screen when 'Show products' button is clicked (* using jest-spy)", async ()=> {
-        //mock fetchProducts endpoint call
+        //Mock fetchProducts endpoint call
         jest.spyOn(services, "fetchProducts").mockImplementation(() => {
             return new Promise((resolve) => resolve({status: 200, data: productsResponse} as AxiosResponse<any>))
         })
 
-        //render component
+        //Render component
         render(<SimpleDataFetch/>)
 
-        //click on button
+        //Click on the button
         await act(async() =>
             userEvent.click(screen.getByText(/Show products/i))
         )
         // userEvent.click(screen.getByText(/Show products/i))
 
-        //expect product to be displayed
+        //Expect the product to be displayed
         expect(screen.getByText(/Product 1/i)).toBeInTheDocument();
     })
 

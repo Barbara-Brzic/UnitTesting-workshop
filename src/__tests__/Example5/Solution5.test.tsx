@@ -6,7 +6,6 @@ import * as services from "../../services/services";
 import {AxiosResponse} from "axios";
 import userEvent from "@testing-library/user-event";
 
-
 describe("MyProducts", () => {
     const productsResponse: { products:  Product[] } = {
         products: [{
@@ -21,16 +20,21 @@ describe("MyProducts", () => {
         price: 0.99
     }
 
-    test("should show loading message while fetching products", () => {
-        //render component
+    test("should show loading message while fetching products", async () => {
+        //Mock fetchProducts to prevent actual API call
+        jest.spyOn(services, "fetchProducts").mockImplementation(() =>
+            new Promise(() => {}) // Never resolves, keeping loading state
+        );
+
+        //Render component
         render(<MyProducts/>)
 
-        //expect loading message to be displayed
+        //Expect a loading message to be displayed
         expect(screen.getByRole("loading-message")).toBeInTheDocument();
     })
 
     test("should fetch product list initially, and display single product info when selected from the list", async () => {
-        //mock http requests
+        //Mock HTTP requests
         const mockFetchProducts = jest.spyOn(services, "fetchProducts").mockResolvedValue({
             status: 200, data: productsResponse
         } as AxiosResponse);
@@ -38,48 +42,48 @@ describe("MyProducts", () => {
             status: 200, data: singleProductInfoResponse
         } as AxiosResponse)
 
-        //render component
+        //Render component
         render(<MyProducts/>)
 
-        //expect fetchProducts endpoint to be called
+        //Expect the fetchProducts endpoint to be called and wait for products to load
         await waitFor(() => {
             expect(mockFetchProducts).toBeCalled();
+            expect(screen.getByText(/Product 1/i)).toBeInTheDocument();
         })
 
-        //expect to render list of products
+        //Expect to render a list of products
         expect(screen.getAllByTestId(/product/)).toHaveLength(1);
-        expect(screen.getByText(/Product 1/i)).toBeInTheDocument();
 
-        //select product
-        userEvent.click(screen.getByRole("select-product-button"));
+        //Select product
+        await act(async () => {
+            userEvent.click(screen.getByRole("select-product-button"));
+        });
 
-        //expect fetchProductInfo endpoint to be called
+        //Expects fetchProductInfo endpoint to be called and product info to be displayed
         await waitFor(() => {
             expect(mockFetchProductInfo).toBeCalled();
+            expect(screen.getByText(singleProductInfoResponse.category)).toBeInTheDocument();
         })
 
-        //expect Selected product info to be displayed
-        expect(screen.getByText(singleProductInfoResponse.id)).toBeInTheDocument();
+        //Expect selected product info to be displayed
+        expect(screen.getByText(singleProductInfoResponse.id.toString())).toBeInTheDocument();
         expect(screen.getByText(singleProductInfoResponse.title)).toBeInTheDocument();
-        expect(screen.getByText(singleProductInfoResponse.category)).toBeInTheDocument();
-        expect(screen.getByText(singleProductInfoResponse.price)).toBeInTheDocument();
+        expect(screen.getByText(singleProductInfoResponse.price.toString())).toBeInTheDocument();
     })
 
 
     test("should show an error message if error occurred", async () => {
-        //mock fetching data error
+        //Mock fetching data error
         const mockFetchProducts = jest.spyOn(services, "fetchProducts").mockRejectedValue({} as AxiosResponse);
 
-        //render component
+        //Render component
         render(<MyProducts/>)
 
-        //expect fetchProducts endpoint to be called
+        //Expects the fetchProducts endpoint to be called and an error message to be displayed
         await waitFor(() => {
             expect(mockFetchProducts).toBeCalled();
+            expect(screen.getByRole("error-message")).toBeInTheDocument();
         })
-
-        //expect error message to be displayed
-        expect(screen.getByRole("error-message")).toBeInTheDocument();
     })
 
 })

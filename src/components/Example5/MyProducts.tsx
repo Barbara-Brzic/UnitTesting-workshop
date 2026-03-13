@@ -3,10 +3,9 @@ import {Product} from "../Example2/ProductList";
 import {fetchProducts, fetchProductInfo} from "../../services/services";
 import {ProductFullInfo, SelectableProductList} from "./SelectableProductList";
 
-
 export const MyProducts = () => {
     const [products, setProducts] = useState<Product[]>([])
-    const [isLoading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState<boolean>(false);
     const [selectedProduct, setSelectedProduct] = useState<ProductFullInfo | undefined>();
 
@@ -16,7 +15,7 @@ export const MyProducts = () => {
                 .then((res) => {
                     if (res.status === 200) setProducts(res.data.products)})
                 .catch(() => setError(true))
-                .finally(() => setLoading(false));
+                .finally(() => setIsLoading(false));
 
         handleProductsFetch().then()
 

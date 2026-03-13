@@ -5,27 +5,27 @@ import { SimpleInput } from '../../components/Example1/SimpleInput'
 
 test('should render title', () => {
     //ARRANGE
-    //prepare data
+    //Prepare data
     const text = 'Example 1'
 
     //ACT
-    //render component
+    //Render component
     render(<SimpleInput />)
 
     //ASSERT
-    //expect text to be displayed on the screen
+    //Expect text to be displayed on the screen
     const title = screen.getByText(text)
     expect(title).toBeInTheDocument()
 })
 
 test('should render input field', () => {
-    //prepare data
+    //Prepare data
     const inputFieldValue = 'Jane Doe'
 
-    //render component
+    //Render component
     render(<SimpleInput />)
 
-    //expect input field to be displayed and have default value
+    //Expect input field to be displayed and have the default value
     // const input = screen.getByRole(/textbox/)
     // const input = screen.getByTestId(/unique-username/)
     const input = screen.getByLabelText(/username/i);
